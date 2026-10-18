@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kosmora User Guide</title>
+<meta name="description" content="Step-by-step guide to Kosmora, the MongoDB schema designer for VS Code.">
+<meta name="theme-color" content="#001e2b">
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="./"><img src="assets/logo.svg" alt="">Kosmora</a>
+    <nav class="nav">
+      <a href="./#features" class="hide-sm">Features</a>
+      <a href="guide.html" class="active keep">User guide</a>
+      <a href="Kosmora-User-Manual.pdf" class="keep">PDF</a>
+      <button class="theme-btn" type="button" title="Switch light or dark" aria-label="Switch light or dark"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.39 5.39 0 0 1-4.4 2.26 5.4 5.4 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/></svg></button>
+    </nav>
+  </div>
+</header>
+
+<div class="watermark" aria-hidden="true"><div class="wm-mark"><span class="wm-name">Kosmora</span><span class="wm-sub">v1.0.0 · crafted by Sanket Santosh Vidya Manohar</span></div></div>
+<div class="wrap guide">
+  <aside class="toc">
+    <b>Contents</b>
+    <a href="#intro">1. Introduction</a>
+    <a href="#install">2. Installing Kosmora</a>
+    <a href="#quickstart">3. Quick start</a>
+    <a href="#designer">4. The schema designer</a>
+    <a href="#export">5. Exporting a schema</a>
+    <a href="#using">6. Using your exports</a>
+    <a href="#settings">7. Settings</a>
+    <a href="#troubleshooting">8. Troubleshooting</a>
+    <a href="#license">9. License and support</a>
+  </aside>
+
+  <main class="doc">
+    <section class="cover">
+      <div><img src="assets/logo.svg" alt=""></div>
+      <div>
+        <h1><span>Kos</span>mora</h1>
+        <div class="t">User Manual</div>
+        <div class="t" style="font-size:14pt;margin-top:4mm">MongoDB Schema Designer for VS Code</div>
+      </div>
+      <div class="meta">
+        <b>Version 1.0.0</b><br>
+        © 2026 Sanket Santosh Vidya Manohar. All rights reserved.<br>
+        sanket-manohar.github.io/kosmora
+      </div>
+    </section>
+
+    <section class="print-toc">
+      <h2>Contents</h2>
+      <ol>
+        <li>Introduction</li><li>Installing Kosmora</li><li>Quick start</li><li>The schema designer</li><li>Exporting a schema</li><li>Using your exports</li><li>Settings</li><li>Troubleshooting</li><li>License and support</li>
+      </ol>
+    </section>
+
+    <h1>User guide</h1>
+    <p class="lead">Everything you need to design MongoDB schemas and export them with Kosmora, explained step by step.</p>
+
+    <h2 id="intro"><span class="n">1</span>Introduction</h2>
+    <p>Kosmora is an extension for Visual Studio Code that lets you draw your MongoDB data model on a canvas and export it as JSON Schema, MongoDB validators, Mongoose, TypeScript, Prisma, Pydantic, Markdown, Mermaid, DBML, SVG or PNG.</p>
+    <div class="note"><b>Completely offline</b>Kosmora never contacts the internet and never connects to a database. It has no telemetry and loads no online resources. It only reads and writes the design files you open and the files you export.</div>
+    <h3>Words used in this guide</h3>
+    <table>
+      <tr><th>Term</th><th>Meaning</th></tr>
+      <tr><td>Schema design</td><td>A <code>.kosmora.json</code> file that describes your collections and fields.</td></tr>
+      <tr><td>Collection</td><td>A group of documents in MongoDB, like a table in SQL.</td></tr>
+      <tr><td>Field</td><td>A named value inside a document, such as <code>email</code> or <code>price</code>.</td></tr>
+      <tr><td>Reference</td><td>A field that stores the <code>_id</code> of a document in another collection.</td></tr>
+      <tr><td>Command Palette</td><td>The VS Code command box. Open it with <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> (<kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> on macOS).</td></tr>
+    </table>
+
+    <h2 id="install"><span class="n">2</span>Installing Kosmora</h2>
+    <p>You need Visual Studio Code 1.85 or newer on Windows, macOS or Linux.</p>
+    <h3>From the Marketplace</h3>
+    <ol>
+      <li>Open VS Code and click the <b>Extensions</b> icon in the activity bar, or press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>X</kbd>.</li>
+      <li>Search for <b>Kosmora</b>.</li>
+      <li>Click <b>Install</b> on "Kosmora: MongoDB Schema Designer" by sanket-manohar.</li>
+    </ol>
+    <h3>From a VSIX file (offline install)</h3>
+    <ol>
+      <li>Download <code>kosmora-1.0.0.vsix</code> from the <a href="https://github.com/sanket-manohar/kosmora/releases/latest">GitHub releases page</a>.</li>
+      <li>In VS Code, open the Extensions view, click the <b>⋯</b> menu at its top and choose <b>Install from VSIX…</b>.</li>
+      <li>Pick the downloaded file. Kosmora is ready when the planet icon appears in the activity bar.</li>
+    </ol>
+    <p>You can also install from a terminal:</p>
+    <pre><code>code --install-extension kosmora-1.0.0.vsix</code></pre>
+
+    <h2 id="quickstart"><span class="n">3</span>Quick start</h2>
+    <p>Kosmora includes an interactive walkthrough with screenshots. It opens on VS Code's Welcome page after you install, and you can reopen it at any time with <b>Kosmora: Get Started with Kosmora</b> from the Command Palette or the <b>⋯</b> menu of the Kosmora sidebar.</p>
+    <p>This five-minute tour creates a design and exports it.</p>
+    <ol>
+      <li>Open a folder in VS Code (<b>File → Open Folder…</b>).</li>
+      <li>Open the Command Palette and run <b>Kosmora: New Sample Schema (Shop)</b>. A ready-made shop design opens in the designer.</li>
+      <li>Click a collection card, such as <b>users</b>. The panel on the right shows its fields. Change a field name or type and watch the card update.</li>
+      <li>Click <b>Export</b> in the top bar and choose a format, for example <b>Mongoose models</b>. The generated code opens in a new editor.</li>
+      <li>Click the planet icon in the activity bar. The <b>Schema Designs</b> view lists every design in your workspace.</li>
+    </ol>
+    <figure><img src="assets/screenshots/designer-light.png" alt="The sample Shop schema in the designer"><figcaption>The sample Shop schema in the designer.</figcaption></figure>
+
+    <h2 id="designer"><span class="n">4</span>The schema designer</h2>
+    <h3>Creating and opening designs</h3>
+    <ul>
+      <li>Run <b>Kosmora: New Schema Design</b> to start an empty design, or <b>Kosmora: New Sample Schema (Shop)</b> to start from an example.</li>
+      <li>Any file whose name ends in <code>.kosmora.json</code> opens in the designer automatically. The <b>Schema Designs</b> view in the Kosmora sidebar lists them all; click one to open it.</li>
+      <li>To see the raw JSON, choose <b>Open as JSON</b> from the <b>More actions</b> menu (⋮). To switch back, run <b>Kosmora: Open in Schema Designer</b>.</li>
+      <li>Designs save like any file with <kbd>Ctrl</kbd>+<kbd>S</kbd>, and undo and redo work as usual.</li>
+    </ul>
+    <h3>The screen at a glance</h3>
+    <table>
+      <tr><th>Area</th><th>What it does</th></tr>
+      <tr><td>Top bar</td><td>Design name, database name and counts; add collection, auto-arrange, zoom, fit, <b>Export</b>, the <b>More actions</b> menu and the inspector toggle.</td></tr>
+      <tr><td>Canvas</td><td>Your collections as cards. Arrows show references; dashed arrows mean one-to-many (an array of references).</td></tr>
+      <tr><td>Inspector</td><td>The right-hand panel. It shows schema details when nothing is selected, or the selected collection's settings, fields and indexes.</td></tr>
+    </table>
+    <h3>Collections</h3>
+    <ol>
+      <li>Click the <b>+ Collection</b> button, press <kbd>A</kbd>, or double-click an empty part of the canvas.</li>
+      <li>Type a name in <b>Collection name</b>. Add a <b>Description</b> if you like; it appears in docs and generated code.</li>
+      <li>Pick a <b>Color</b> to group related collections.</li>
+      <li>Turn on <b>Timestamps</b> to add <code>createdAt</code> and <code>updatedAt</code> automatically.</li>
+      <li>Drag a card by its header to move it. Press <kbd>L</kbd> to auto-arrange everything.</li>
+    </ol>
+    <h3>Fields</h3>
+    <ol>
+      <li>Select a collection and click <b>Add field</b>.</li>
+      <li>Type the field name and choose its type.</li>
+      <li>Click <b>REQ</b> to make the field required.</li>
+      <li>Click the arrow (<b>Show details</b>) for more options: <b>Unique</b>, <b>Indexed</b>, <b>Default</b>, <b>Description</b>, <b>Minimum</b>/<b>Maximum</b>, <b>Min length</b>/<b>Max length</b>, <b>Pattern (regex)</b> and <b>Allowed values</b>.</li>
+      <li>Use the ⋮ menu on a field to move it up or down, duplicate it or delete it.</li>
+    </ol>
+    <p><code>_id</code> is added automatically as an ObjectId, so you don't need to create it.</p>
+    <table>
+      <tr><th>Type</th><th>Use it for</th></tr>
+      <tr><td>String</td><td>Text</td></tr>
+      <tr><td>Number, Int, Long, Double, Decimal128</td><td>Numbers. Use Decimal128 for money.</td></tr>
+      <tr><td>Boolean</td><td>true or false</td></tr>
+      <tr><td>Date</td><td>Dates and times</td></tr>
+      <tr><td>ObjectId</td><td>IDs, and references to other collections</td></tr>
+      <tr><td>UUID, Binary</td><td>UUIDs and binary data</td></tr>
+      <tr><td>Object</td><td>An embedded sub-document. Use <b>Add sub-field</b> to fill it.</td></tr>
+      <tr><td>Array</td><td>A list. Choose what it holds in <b>Array of</b>.</td></tr>
+      <tr><td>Mixed</td><td>Any value</td></tr>
+    </table>
+    <h3>References between collections</h3>
+    <ol>
+      <li>Add a field with type <b>ObjectId</b>, for example <code>user</code> in <code>orders</code>.</li>
+      <li>Open its details and choose the target in <b>References collection</b>, for example <code>users</code>.</li>
+      <li>An arrow appears between the cards. For one-to-many, make the field an <b>Array</b> of ObjectId with a reference; the arrow is dashed.</li>
+    </ol>
+    <figure><img src="assets/screenshots/designer-inspector.png" alt="Editing the users collection"><figcaption>Editing a collection in the inspector.</figcaption></figure>
+    <h3>Indexes</h3>
+    <p>Marking a field <b>Unique</b> or <b>Indexed</b> creates a single-field index. For compound, text or TTL indexes, click <b>Add index</b> in the inspector, list the fields and choose the options.</p>
+    <h3>Problems</h3>
+    <p>Kosmora checks your design as you work. Duplicate names, invalid field names and references to collections that don't exist show a warning icon on the card and a count at the bottom left of the canvas. Click the count to see the list, and click a problem to select its collection.</p>
+    <h3>Keyboard shortcuts</h3>
+    <table>
+      <tr><th>Key</th><th>Action</th></tr>
+      <tr><td><kbd>A</kbd></td><td>Add a collection</td></tr>
+      <tr><td><kbd>L</kbd></td><td>Auto-arrange</td></tr>
+      <tr><td><kbd>F</kbd></td><td>Fit everything on screen</td></tr>
+      <tr><td><kbd>+</kbd> / <kbd>-</kbd></td><td>Zoom in or out (or <kbd>Ctrl</kbd> + scroll)</td></tr>
+      <tr><td><kbd>Del</kbd></td><td>Delete the selected collection</td></tr>
+      <tr><td><kbd>Esc</kbd></td><td>Clear the selection</td></tr>
+    </table>
+
+    <h2 id="export"><span class="n">5</span>Exporting a schema</h2>
+    <p>Click <b>Export</b> in the designer and choose a format. Or use the Command Palette:</p>
+    <ul>
+      <li><b>Kosmora: Export Schema…</b> saves one format to a file.</li>
+      <li><b>Kosmora: Export Schema in All Formats…</b> saves every format into a folder you choose.</li>
+      <li><b>Kosmora: Preview Schema Export…</b> opens the result in an unsaved editor so you can look before saving.</li>
+    </ul>
+    <table>
+      <tr><th>Format</th><th>What you get</th></tr>
+      <tr><td>JSON Schema</td><td>Draft 2020-12 definitions, one per collection.</td></tr>
+      <tr><td>MongoDB validators</td><td>A mongosh script that creates each collection with a <code>$jsonSchema</code> validator, plus its indexes.</td></tr>
+      <tr><td>Mongoose models</td><td>Schemas with refs, validation and indexes, as CommonJS or ES modules.</td></tr>
+      <tr><td>TypeScript interfaces</td><td>Typed documents using the <code>mongodb</code> package's types.</td></tr>
+      <tr><td>Prisma schema</td><td>The MongoDB provider, with composite types and relations.</td></tr>
+      <tr><td>Pydantic models</td><td>Python Pydantic v2 models.</td></tr>
+      <tr><td>Markdown docs</td><td>Field tables, indexes and a Mermaid diagram.</td></tr>
+      <tr><td>Mermaid</td><td>An <code>erDiagram</code> you can paste into GitHub or docs.</td></tr>
+      <tr><td>DBML</td><td>For dbdiagram.io and similar tools.</td></tr>
+      <tr><td>SVG and PNG</td><td>Images of your diagram, in light or dark.</td></tr>
+    </table>
+    <figure><img src="assets/screenshots/exported-diagram.png" alt="An exported PNG diagram"><figcaption>A diagram exported as PNG.</figcaption></figure>
+
+    <h2 id="using"><span class="n">6</span>Using your exports</h2>
+    <p>Kosmora never connects to a database. It only writes the files you export, and you decide where to use them.</p>
+    <ul>
+      <li><b>Application code.</b> Copy the Mongoose models, TypeScript interfaces, Prisma schema or Pydantic models into your project and adjust them as needed.</li>
+      <li><b>Documentation.</b> Commit the Markdown, Mermaid, DBML or image exports next to your code, or paste them into a wiki.</li>
+      <li><b>MongoDB validators.</b> The exported <code>.mongodb.js</code> file is a mongosh script that creates each collection with its validator and indexes. Read it first, then run it yourself on a test database:</li>
+    </ul>
+    <pre><code>mongosh "&lt;your connection string&gt;" shop.mongodb.js</code></pre>
+    <div class="note"><b>Review before you run</b>Generated code and scripts are a starting point. Check them, and try them on a non-production copy of your data, before you use them on a real database. Keep backups of your data.</div>
+
+    <h2 id="settings"><span class="n">7</span>Settings</h2>
+    <p>Open <b>File → Preferences → Settings</b> and search for <b>Kosmora</b>.</p>
+    <table>
+      <tr><th>Setting</th><th>Default</th><th>What it does</th></tr>
+      <tr><td><code>kosmora.theme</code></td><td>auto</td><td>Color scheme: auto (follow VS Code), light or dark.</td></tr>
+      <tr><td><code>kosmora.export.outputFolder</code></td><td>(empty)</td><td>Export folder, relative to the design file.</td></tr>
+      <tr><td><code>kosmora.export.mongooseModuleSystem</code></td><td>commonjs</td><td>CommonJS or ES module output for Mongoose.</td></tr>
+      <tr><td><code>kosmora.export.imageTheme</code></td><td>light</td><td>Theme of exported SVG and PNG diagrams.</td></tr>
+    </table>
+
+    <h2 id="troubleshooting"><span class="n">8</span>Troubleshooting</h2>
+    <h3>The designer opens as plain text</h3>
+    <p>The file name must end in <code>.kosmora.json</code>. Right-click the file and choose <b>Open With… → Kosmora Schema Designer</b>, or run <b>Kosmora: Open in Schema Designer</b>.</p>
+    <h3>I can't find my exported files</h3>
+    <p>Kosmora asks where to save every export. The save dialog starts in the folder of the design file, or in the folder set in <code>kosmora.export.outputFolder</code>.</p>
+    <h3>The diagram image is too dark or too light</h3>
+    <p>Change <code>kosmora.export.imageTheme</code> to light or dark and export again.</p>
+
+    <h2 id="license"><span class="n">9</span>License and support</h2>
+    <p>Kosmora is proprietary software. © 2026 Sanket Santosh Vidya Manohar. All rights reserved.</p>
+    <ul>
+      <li><b>You may</b> download Kosmora for free from the official Marketplace listing or GitHub releases, and use it for personal, educational and commercial work. Everything you create with it is yours.</li>
+      <li><b>Your data:</b> Kosmora never connects to a database. You are responsible for how you use the code and scripts it generates, and for your backups. Kosmora is provided "as is", and its owner accepts no liability for data loss, corruption, downtime or other damage from using it or its output.</li>
+      <li><b>You may not</b> republish, redistribute, modify, update, sell or reverse engineer Kosmora, or use its name or logo for another product, without written permission.</li>
+    </ul>
+    <p>Read the full terms in <a href="https://github.com/sanket-manohar/kosmora/blob/main/LICENSE.md">LICENSE.md</a>.</p>
+    <p>For help, bug reports and feature ideas, open an issue at <a href="https://github.com/sanket-manohar/kosmora/issues">github.com/sanket-manohar/kosmora/issues</a>.</p>
+    <h3>Trademarks and independence</h3>
+    <p>Kosmora is a separate, independently developed tool. It is not affiliated with, sponsored by, endorsed by or connected to MongoDB, Inc., Microsoft Corporation or any other company whose products it designs for or exports to.</p>
+    <p>MongoDB, MongoDB Atlas and MongoDB Compass are trademarks of MongoDB, Inc. Visual Studio Code is a trademark of Microsoft Corporation. Mongoose, Prisma, Pydantic, TypeScript, Mermaid, DBML and all other names in this guide belong to their respective owners. They are mentioned only to describe what Kosmora designs for or exports to. Kosmora does not include, sell or connect to any of those products; you obtain and use them separately under their own terms.</p>
+  </main>
+</div>
+
+<footer class="foot">
+  <div class="wrap">
+    <div>© 2026 Sanket Santosh Vidya Manohar. All rights reserved.</div>
+    <nav>
+      <a href="./">Home</a>
+      <a href="https://github.com/sanket-manohar/kosmora/blob/main/LICENSE.md">License</a>
+      <a href="https://github.com/sanket-manohar/kosmora/issues">Support</a>
+    </nav>
+  </div>
+</footer>
+<script src="assets/site.js"></script>
+</body>
+</html>
